@@ -62,6 +62,7 @@ class DeliveryController extends Controller
             ], 201);
         }
 
+        $arrayIdEntrega = [];
         foreach ($datos["entregas"] as $dato) {
             $entrega = Delivery::whereId($dato["id"])->first();
             if($entrega != null){
@@ -83,6 +84,13 @@ class DeliveryController extends Controller
             \App\Deliverydetail::whereId($entrega["id"])->delete();
             
             foreach($dato["entregadetalles"] as $d){
+                $producto = \App\Product::whereId($d["idProducto"])->first();
+                if($producto->gastable == 1){
+                    if($producto->existencia > 0){
+                        $producto->existencia -= $d["cantidad"];
+                        $producto->save();
+                    }
+                }
                 \App\Deliverydetail::create([
                     "idEntrega" => $entrega["id"],
                     "idProducto" => $d["idProducto"],
@@ -91,6 +99,8 @@ class DeliveryController extends Controller
                     "detalles" => "",
                 ]);
             }
+
+            array_push($arrayIdEntrega, $entrega->id);
         }
         
 
@@ -100,7 +110,7 @@ class DeliveryController extends Controller
             'errores' => 0,
             'mensaje' => 'Se ha eliminado correctamente',
             // 'unidades' => \App\Unit::whereStatus(1)->get(),
-            "productos" => Delivery::all()
+            "entregas" => DeliveryResource::collection(Delivery::whereIn("id", $arrayIdEntrega)->get())
         ], 201);
     }
 

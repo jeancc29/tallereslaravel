@@ -26,6 +26,7 @@ class DeliveryResource extends JsonResource
             // 'detalle' => $this->detalle,
             'detalles' => DeliverydetailsResource::collection($this->detalles),
             'status' => $this->status,
+            'created_at' => $this->created_at,
         ];
     }
 }

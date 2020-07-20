@@ -205,6 +205,7 @@ class ProductController extends Controller
         if($producto != null){
             $producto->unidades()->detach();
             $producto->proyectos()->detach();
+            $producto->entregadetalle()->detach();
             
 
             Product::whereId($producto->id)->delete();

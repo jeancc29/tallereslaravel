@@ -21,4 +21,10 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Proyect', 'product_proyect', 'idProducto', 'idProyecto')->withPivot('cantidad', 'cantidadEntregada');
     }
+
+    public function entregadetalle()
+    {
+        //Modelo, foreign key, foreign key, local key, local key
+        return $this->hasMany('App\Deliverydetail', 'idProducto');
+    }
 }

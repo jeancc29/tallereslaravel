@@ -26,5 +26,10 @@ class UnitSeeder extends Seeder
             "abreviatura" => "GLN/S",
             "valor" => 1,
         ]);
+        \App\Unit::create([
+            "descripcion" => "Gruesa",
+            "abreviatura" => "Gruesa",
+            "valor" => 144,
+        ]);
     }
 }

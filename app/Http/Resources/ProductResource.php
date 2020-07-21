@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
             'status' => $this->status,
             'gastable' => $this->gastable,
             'unidades' => $this->unidades,
+            'cantidadMinima' => $this->cantidadMinima,
         ];
     }
 }

@@ -86,6 +86,7 @@ class ProductController extends Controller
             $producto->existencia = $datos["producto"]["existencia"];
             $producto->status = $datos["producto"]["status"];
             $producto->gastable = $datos["producto"]["gastable"];
+            $producto->cantidadMinima = $datos["producto"]["cantidadMinima"];
            $producto->save();
         }
         else{
@@ -94,6 +95,7 @@ class ProductController extends Controller
                 "existencia" => $datos["producto"]["existencia"],
                 "status" => $datos["producto"]["status"],
                 "gastable" => $datos["producto"]["gastable"],
+                "cantidadMinima" => $datos["producto"]["cantidadMinima"],
             ]);
         }
 

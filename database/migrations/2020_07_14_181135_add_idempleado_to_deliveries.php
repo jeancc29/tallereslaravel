@@ -27,7 +27,8 @@ class AddIdempleadoToDeliveries extends Migration
     public function down()
     {
         Schema::table('deliveries', function (Blueprint $table) {
-            //
+            $table->dropForeign(['idEmpleado']);
+            $table->dropColumn('idEmpleado');
         });
     }
 }

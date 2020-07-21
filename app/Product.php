@@ -11,6 +11,7 @@ class Product extends Model
         'existencia', 
         'status', 
         'gastable', 
+        'cantidadMinima', 
     ];
     public function unidades()
     {

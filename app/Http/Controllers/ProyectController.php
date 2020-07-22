@@ -21,7 +21,7 @@ class ProyectController extends Controller
         return Response::json([
             'errores' => 0,
             'mensaje' => 'Se ha eliminado correctamente',
-            'proyectos' => ProyectResource::collection(Proyect::all()),
+            'proyectos' => ProyectResource::collection(Proyect::orderBy("descripcion", "asc")->get()),
             'productos' => ProductResource::collection(\App\Product::all()),
             "clientes" => \App\Customer::all()
         ], 201);

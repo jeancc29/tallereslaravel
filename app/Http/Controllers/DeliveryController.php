@@ -156,6 +156,35 @@ class DeliveryController extends Controller
      */
     public function destroy(Delivery $delivery)
     {
-        //
+        $datos = request()['datos'];
+        try {
+            $datos = \App\Classes\Helper::jwtDecode($datos);
+            if(isset($datos["datosMovil"]))
+                $datos = $datos["datosMovil"];
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Response::json([
+                'errores' => 1,
+                'mensaje' => 'Token incorrecto',
+                'token' => $datos
+            ], 201);
+        }
+
+
+        $entrega = Employee::whereId($datos["entrega"]["id"])->first();
+        if($entrega != null){
+            $entrega->status = 0;
+            $entrega->save();
+            return Response::json([
+                'errores' => 0,
+                'mensaje' => 'Se ha eliminado correctamente',
+            ], 201);
+        }
+
+
+        return Response::json([
+            'errores' => 1,
+            'mensaje' => 'La entrega no existe'
+        ], 201);
     }
 }

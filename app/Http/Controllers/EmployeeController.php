@@ -19,7 +19,7 @@ class EmployeeController extends Controller
         return Response::json([
             'errores' => 0,
             'mensaje' => 'Se ha eliminado correctamente',
-            'empleados' => Employee::all(),
+            'empleados' => Employee::orderBy("nombre", "asc")->get(),
         ], 201);
     }
 

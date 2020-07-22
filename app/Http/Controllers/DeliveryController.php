@@ -22,7 +22,7 @@ class DeliveryController extends Controller
         return Response::json([
             'errores' => 0,
             'mensaje' => 'Datos correctos',
-            'entregas' => DeliveryResource::collection(\App\Delivery::all()),
+            'entregas' => DeliveryResource::collection(\App\Delivery::orderBy("id", "desc")->get()),
             'clientes' => CustomerResource::collection(\App\Customer::all()),
             'productos' => ProductResource::collection(\App\Product::all()),
             'empleados' => \App\Employee::all(),

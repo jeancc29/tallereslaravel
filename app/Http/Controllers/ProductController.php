@@ -40,7 +40,7 @@ class ProductController extends Controller
         return Response::json([
             'errores' => 0,
             'mensaje' => 'Se ha eliminado correctamente',
-            'productos' => ProductResource::collection(Product::all()),
+            'productos' => ProductResource::collection(Product::orderBy("descripcion", "asc")->get()),
             "unidades" => \App\Unit::all()
         ], 201);
     }

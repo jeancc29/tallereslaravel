@@ -171,10 +171,17 @@ class DeliveryController extends Controller
         }
 
 
-        $entrega = Employee::whereId($datos["entrega"]["id"])->first();
+        $entrega = Delivery::whereId($datos["entrega"]["id"])->first();
         if($entrega != null){
             $entrega->status = 0;
             $entrega->save();
+            foreach($entrega->detalles as $d){
+                $producto = \App\Product::whereId($d->idProducto)->first();
+                if($producto != null){
+                    $producto->existencia += $d->cantidad;
+                    $producto->save();
+                }
+            }
             return Response::json([
                 'errores' => 0,
                 'mensaje' => 'Se ha eliminado correctamente',

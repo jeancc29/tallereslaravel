@@ -24,7 +24,7 @@ class DeliveryResource extends JsonResource
             'proyecto' => $this->proyecto,
             'empleado' => $this->empleado,
             // 'detalle' => $this->detalle,
-            'detalles' => DeliverydetailsResource::collection($this->detalles),
+            'entregadetalles' => DeliverydetailsResource::collection($this->detalles),
             'status' => $this->status,
             'created_at' => $this->created_at,
         ];
